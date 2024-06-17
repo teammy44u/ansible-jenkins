@@ -23,9 +23,8 @@ pipeline{
          stage("Upload zip file in jfrog"){
             steps{
                 sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd \
-                -T /home/ec2-user/jenkins/workspace/ansible-playbook/main.zip \
-                "http://ec2-100-25-118-58.compute-1.amazonaws.com:8081/artifactory/ansible-playbook/playbooks_${BUILD_ID}.zip"'
-            
+                -T /home/ec2-user/jenkins/workspace/ansible-playbook \
+                "http://ec2-3-86-7-150.compute-1.amazonaws.com:8081/artifactory/ansible-playbook/playbooks_${BUILD_ID}.zip"'
             }
         }
     }
