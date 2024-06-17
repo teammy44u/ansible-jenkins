@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    - path_ec2: /home/ec2-user/study-session
+    - path_ubuntu: /home/ubuntu/study-session
+  tasks:
+    - name: create new file on Amazon linux node
+      file:
+        path: "{{ path_ec2 }}"
+        state: touch
+      when: ansible_os_family=="RedHat"
+
+    - name: create new file on Ubuntu node
+      file:
+        path: "{{ path_ubuntu }}"
+        state: touch
+      when: ansible_os_family=="Debian"

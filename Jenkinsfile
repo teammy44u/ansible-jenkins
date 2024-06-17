@@ -45,6 +45,21 @@ pipeline{
                 sh 'ansible all -m ping'
             }
         }
+        stage("check test.yml"){
+            steps{
+                sh '''
+                cd /home/ec2-user/ansible
+                ansible-playbook test.yml --syntax-check
+                '''
+            }
+        }
+
+        stage("run playbook test.yml"){
+            steps{
+                sh 'ansible-playbook test.yml'
+            }
+        }
+
 
     }
 }    
