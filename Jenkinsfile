@@ -27,6 +27,20 @@ pipeline{
                 "http://ec2-3-86-7-150.compute-1.amazonaws.com:8081/artifactory/ansible-playbook/playbooks_${BUILD_ID}.zip"'
             }
         }
+          stage("deliver playbooks on /home/ec2-user/ansible"){
+            steps{
+                sh 'mkdir -p /home/ec2-user/ansible'
+                sh 'cp -f /home/ec2-user/jenkins/workspace/ansible-playbook/main.zip /home/ec2-user/ansible'
+                sh '''
+                cd /home/ec2-user/ansible
+                unzip -o main.zip
+                rm -f main.zip
+                cp -rf ansible-jenkins-main/* .
+                rm -rf ansible-jenkins-main/
+                '''
+            }
+        }
+
     }
 }    
     
